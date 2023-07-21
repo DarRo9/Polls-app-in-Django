@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    body {
+    background-color: #cdfcf0;
+}
+h1 {
+    color:rgb(117, 28, 211);
+    width: 80%;
+    padding: 0.5%;
+    margin: 2%;
+    font: 2.5em "Trebuchet MS", "Lucida Sans";
+}
+.rounded {
+counter-reset: li; 
+list-style: none; 
+font: 1.5em "Trebuchet MS", "Lucida Sans";
+padding: 2%;
+color:azure;
+font-weight: bold;
+margin: 2%;
+position: absolute;
+top: 15%;
+width: 70%;
+}
+.rounded a {
+position: relative;
+width: 50%;
+display: block;
+padding: .4em .4em .4em 2em;
+margin: .5em 0;
+background: rgb(117, 28, 211);
+color: azure;
+text-decoration: none;
+border-radius: .3em;
+transition: .3s ease-out;
+}
+.rounded a:hover {background: hwb(188 56% 0%);}
+.rounded a:hover:before {transform: rotate(360deg);}
+.rounded a:before {
+content: counter(li);
+counter-increment: li;
+position: absolute;
+left: -1.3em;
+top: 70%;
+margin-top: -1.3em;
+background: #8FD4C1;
+height: 2em;
+width: 2em;
+line-height: 2em;
+border: .3em solid white;
+text-align: center;
+font-weight: bold;
+border-radius: 2em;
+transition: all .3s ease-out;
+}
+</style>
+
+</head>
+<body>
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'polls/q1.png' %}">
+<h1>Привет, за какой вопрос ты хочешь проголосовать?</h1>
+{% if latest_question_list %}
+    <ol class="rounded">
+    {% for question in latest_question_list %}
+    <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+
+    {% endfor %}
+    </ol>
+    <img src="{% static 'polls/q1.png' %}" width="40%" style="position: absolute; right: 7%; top:18%">
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+</body>
+</html>

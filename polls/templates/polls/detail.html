@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+        background-color: #cdfcf0;
+    }
+    h1 {
+        color:rgb(117, 28, 211);
+        width: 60%;
+        padding: 0.5%;
+        margin: 2%;
+        font: 1.5em "Trebuchet MS", "Lucida Sans";
+    }
+    body {
+    counter-reset: li; 
+    list-style: none; 
+    font: 1.5em "Trebuchet MS", "Lucida Sans";
+    padding: 2%;
+    color:rgb(117, 28, 211);
+    font-weight: bold;
+    margin: 2%;
+    position: absolute;
+    top: 15%;
+    width: 70%;
+    }
+   
+    </style>
+</head>
+<body>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'polls/img1.jpg' %}">
+<h1>{{ question.question_text }}</h1>
+<img src="{% static 'polls/img1.jpg' %}" width="30%" style="transform: scale(-1, 1); position: absolute; top:30%; right:5%; z-index:1">
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'polls:vote' question.id %}" method="post">
+{% csrf_token %}
+{% for choice in question.choice_set.all %}
+    
+    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+   
+{% endfor %}
+<input type="submit" value="Vote" style="position: absolute; top:5%; right: 4%; font-size: 1.5em; border-color: rgb(255, 0, 140); background-color: rgb(255, 0, 140);color: rgb(255, 255, 255); z-index:2" >
+</form>
+</body>
+</html>
+

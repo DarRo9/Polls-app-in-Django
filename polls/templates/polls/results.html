@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    body {
+    background-color: #cdfcf0;
+}
+h1 {
+    color:rgb(117, 28, 211);
+    width: 80%;
+    padding: 0.5%;
+    margin: 2%;
+    font: 2.5em "Trebuchet MS", "Lucida Sans";
+}
+.rounded {
+counter-reset: li; 
+list-style: none; 
+font: 1.5em "Trebuchet MS", "Lucida Sans";
+padding: 2%;
+color:rgb(117, 28, 211);
+font-weight: bold;
+margin: 2%;
+position: absolute;
+top: 15%;
+width: 70%;
+}
+.rounded a {
+position: relative;
+width: 50%;
+display: block;
+padding: .4em .4em .4em 2em;
+margin: .5em 0;
+background: rgb(117, 28, 211);
+color:rgb(117, 28, 211);
+text-decoration: none;
+border-radius: .3em;
+transition: .3s ease-out;
+}
+.rounded a:hover {background: hwb(188 56% 0%);}
+.rounded a:hover:before {transform: rotate(360deg);}
+.rounded a:before {
+content: counter(li);
+counter-increment: li;
+position: absolute;
+left: -1.3em;
+top: 70%;
+margin-top: -1.3em;
+background: #8FD4C1;
+height: 2em;
+width: 2em;
+line-height: 2em;
+border: .3em solid white;
+text-align: center;
+font-weight: bold;
+border-radius: 2em;
+transition: all .3s ease-out;
+}
+</style>
+
+</head>
+<body>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/img1.jpg' %}">
+<h1>{{ question.question_text }}</h1>
+<ol class="rounded">
+{% for choice in question.choice_set.all %}
+    <li>{{ choice.choice_text }} - {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+{% endfor %}
+</ol>
+<button style="position: absolute; top:20%; right: 20%; font-size: 1.5em; border-color: rgb(255, 0, 140); background-color: rgb(255, 0, 140);color: rgb(255, 255, 255); z-index:2; width:9em; height: 2em;"><a href="{% url 'polls:detail' question.id %}" style="position: absolute; top:2%; right: 4%; font-size: 1.5em;color: rgb(255, 255, 255); z-index:2; text-decoration: none; white-space: nowrap;">Vote again?</a></button>
+
+<img src="{% static 'polls/ok.jpg' %}" width="30%" style="transform: scale(-1, 1); position: absolute; top:45%; left:2%; z-index:1">
+<img src="{% static 'polls/qw.webp' %}" width="30%" style="transform: scale(-1, 1); position: absolute; top:25%; right:25%">
+
+</body>
+</html>
