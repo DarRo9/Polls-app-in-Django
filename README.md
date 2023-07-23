@@ -1,9 +1,17 @@
 Enter these commands one by one:
+
 git clone https://github.com/DarRo9/PollsAppInDjango.git
+
 cd PollsAppInDjango
+
 python -m venv venvset1
+
+venvset1\Scripts\activate (for Windows)
+
 pip install django
+
 python manage.py runserver
+
 
 Open local host http://127.0.0.1:8000/polls
 <img width="960" alt="1" src="https://github.com/DarRo9/PollsAppInDjango/assets/124833469/00ecd435-497d-4500-8308-b1189257ac61">
